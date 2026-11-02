@@ -52,12 +52,14 @@ const App = () => {
       [2, 4, 6],
     ];
 
+    let hasWinner = false;
     winningPositions.forEach((position) => {
       const c1 = board[position[0]];
       const c2 = board[position[1]];
       const c3 = board[position[2]];
 
       if (c1 !== null && c1 === c2 && c2 === c3) {
+        hasWinner = true;
         console.log("WINNER", currentTurn == "O" ? "X" : "O");
         setIsWon(true);
         // text is in reverse order because the turn has already swapped before win checks
@@ -68,14 +70,15 @@ const App = () => {
         }
         swapTurn();
         return;
-      } else if (board.every((cell) => cell !== null)) {
-        console.log("DRAW", currentTurn == "O" ? "X" : "O");
-        setIsWon(true);
-        setPlayer1Text("DRAW");
-        setPlayer2Text("DRAW");
-        return;
       }
     });
+
+    if (!hasWinner && board.every((cell) => cell !== null)) {
+      console.log("DRAW", currentTurn == "O" ? "X" : "O");
+      setIsWon(true);
+      setPlayer1Text("DRAW");
+      setPlayer2Text("DRAW");
+    }
   };
 
   const resetGame = () => {
