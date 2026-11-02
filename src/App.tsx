@@ -78,6 +78,15 @@ const App = () => {
     });
   };
 
+  const resetGame = () => {
+    setBoard(Array(9).fill(null));
+    setPlayer1Text("Player 1 [X]");
+    setPlayer2Text("Player 2 [O]");
+    setCurrentTurn("X");
+    setIsWon(false);
+    console.info("game successfully reset");
+  };
+
   return (
     <div className="container-fluid min-vh-100 min-vw-100 bg-primary d-flex flex-column align-items-center justify-content-center user-select-none">
       <div className="d-flex gap-5">
@@ -89,6 +98,13 @@ const App = () => {
           <Row key={rowIndex} blocks={blocks.slice(rowIndex * 3, rowIndex * 3 + 3)} />
         ))}
       </div>
+      <button
+        className={`btn btn-lg btn-warning ${isWon && "visible"}`}
+        style={{ visibility: "hidden" }}
+        onClick={resetGame}
+      >
+        Reset
+      </button>
     </div>
   );
 };
