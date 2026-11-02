@@ -1,11 +1,15 @@
-import Block from "./Block";
+import Block, { type blockProps } from "./Block";
 
-const Row = () => {
+type RowProps = {
+  blocks: blockProps[];
+};
+
+const Row = ({ blocks }: RowProps) => {
   return (
     <div className="row">
-      <Block />
-      <Block />
-      <Block />
+      {blocks.map((block) => (
+        <Block key={block.index} {...block} />
+      ))}
     </div>
   );
 };
